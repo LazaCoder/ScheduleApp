@@ -3,11 +3,18 @@ package com.example.scheduleapp
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.height
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import com.example.scheduleapp.ui.theme.ScheduleAppTheme
 
 
@@ -21,7 +28,20 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             ScheduleAppTheme {
-                HomePage()
+
+                Column(
+                 modifier = Modifier.background(color = Color(0xFFEFF3F8))
+
+
+                ) {
+                    Header()
+                    Spacer(modifier = Modifier.height(50.dp))
+
+
+                    AttendancePage()
+
+                }
+
             }
         }
     }

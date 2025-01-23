@@ -17,6 +17,7 @@ import androidx.compose.ui.graphics.Shadow
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
@@ -27,11 +28,12 @@ fun HomePage() {
             .fillMaxSize()
             .padding(horizontal = 8.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
+        verticalArrangement = Arrangement.Top,
+
     ) {
         // Welcome Text
         Text(
-            text = "Log in for better experience...",
+            text = "Log in for better\nexperience...",
             style = TextStyle(
                 fontSize = 22.sp,
                 fontWeight = FontWeight.Bold,
@@ -39,10 +41,13 @@ fun HomePage() {
                 shadow = Shadow(
                     color = Color.Black.copy(alpha = 0.12f),
                     blurRadius = 12f
-                )
+                ),
+                textAlign = TextAlign.Center
             ),
-            modifier = Modifier.padding(bottom = 16.dp)
+            modifier = Modifier.padding(bottom = 16.dp).align(Alignment.CenterHorizontally)
         )
+
+        Spacer(modifier = Modifier.height(16.dp))
 
         // Button
         Button(
@@ -70,8 +75,8 @@ fun HomePage() {
             painter = painterResource(id = R.drawable.qr_code),
             contentDescription = "QR Code",
             modifier = Modifier
-                .size(215.dp)
-                .offset(y = 100.dp)
+                .size(245.dp)
+                .offset(y = 80.dp)
 
         )
     }
