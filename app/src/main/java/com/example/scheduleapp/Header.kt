@@ -17,7 +17,7 @@ fun Header() {
         modifier = Modifier
             .fillMaxWidth()
             .background(Color(0xFFEFF3F8)) // Light background color
-            .padding(horizontal = 30.dp, vertical = 30.dp),
+            .padding(start = 30.dp, end = 30.dp, top = 20.dp),         // .padding(horizontal = 30.dp, vertical = 20.dp),
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
     ) {

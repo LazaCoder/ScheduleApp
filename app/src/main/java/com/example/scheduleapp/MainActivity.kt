@@ -15,7 +15,9 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.compose.rememberNavController
 import com.example.scheduleapp.ui.theme.ScheduleAppTheme
+import com.google.zxing.qrcode.encoder.QRCode
 
 
 val Poppins = FontFamily(
@@ -37,8 +39,9 @@ class MainActivity : ComponentActivity() {
                     Header()
                     Spacer(modifier = Modifier.height(50.dp))
 
+                    val navController = rememberNavController()
+                    ScheduleApp()
 
-                    AttendancePage()
 
                 }
 
