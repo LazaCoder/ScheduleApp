@@ -22,19 +22,23 @@ fun Header(navController: NavHostController, isLoggedIn: Boolean) {
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
     ) {
-        // Left Image (Profile)
-        Image(
-            painter = painterResource(id = R.drawable.user_icon), // Replace with your image resource
-            contentDescription = "Profile Image",
-            modifier = Modifier.size(32.dp)
-        )
+
+
+        if(isLoggedIn) {
+            // Left Image (Profile)
+            Image(
+                painter = painterResource(id = R.drawable.user_icon), // Replace with your image resource
+                contentDescription = "Profile Image",
+                modifier = Modifier.size(32.dp)
+            )
+        }
 
         // Right Image (Settings) with logout functionality.
         // Only display if the user is logged in.
         if (isLoggedIn) {
             Image(
-                painter = painterResource(id = R.drawable.settings_icon), // Replace with your image resource
-                contentDescription = "Settings Image",
+                painter = painterResource(id = R.drawable.logout), // Replace with your image resource
+                contentDescription = "Logout Image",
                 modifier = Modifier
                     .size(32.dp)
                     .clickable {

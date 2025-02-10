@@ -9,6 +9,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.graphics.Shadow
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
@@ -34,14 +35,17 @@ fun HomePage(navController: NavHostController) {
     var errorMessage by remember { mutableStateOf("") }
     val coroutineScope = rememberCoroutineScope()
 
-    // Retrofit setup (remember to update the base URL)
+    // Retrofit setup
     val retrofit = remember {
         Retrofit.Builder()
-            .baseUrl("https://ams-sz8c.onrender.com/") // Replace with your actual API base URL
+            .baseUrl("https://ams-sz8c.onrender.com/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
     }
     val authApi = remember { retrofit.create(AuthApi::class.java) }
+
+
+    Spacer(modifier = Modifier.height(100.dp))
 
     Column(
         modifier = Modifier
@@ -56,7 +60,7 @@ fun HomePage(navController: NavHostController) {
             style = TextStyle(
                 fontSize = 22.sp,
                 fontWeight = FontWeight.Bold,
-                fontFamily = Poppins, // Ensure your font is defined/imported
+                fontFamily = Poppins,
                 shadow = Shadow(
                     color = Color.Black.copy(alpha = 0.12f),
                     blurRadius = 12f
@@ -73,11 +77,11 @@ fun HomePage(navController: NavHostController) {
         // Log in Button that opens the login form popup
         Button(
             onClick = { showLoginDialog = true },
-            shape = MaterialTheme.shapes.medium,
+            shape = RectangleShape,
             modifier = Modifier
                 .size(width = 170.dp, height = 65.dp)
                 .shadow(elevation = 12.dp),
-            colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF00008B))
+            colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF274C77))
         ) {
             Text(
                 text = "Log in",
@@ -87,7 +91,7 @@ fun HomePage(navController: NavHostController) {
             )
         }
 
-        Spacer(modifier = Modifier.height(8.dp))
+
 
         // QR Code Image
         Image(

@@ -1,9 +1,11 @@
 package com.example.scheduleapp
+
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -17,13 +19,20 @@ import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
+// import androidx.compose.ui.text.font.FontFamily // Uncomment if you have Poppins defined
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 
 @Composable
-fun ClassPage(subjectName: String, subjectCode: String, startDate: String) {
+fun ClassPage(
+    subjectName: String,
+    subjectCode: String,
+    startDate: String,
+    navController: NavHostController
+) {
     Surface(modifier = Modifier.fillMaxSize(), color = Color(0xFFF0F4FA)) {
         Column(
             modifier = Modifier
@@ -39,7 +48,7 @@ fun ClassPage(subjectName: String, subjectCode: String, startDate: String) {
                     fontWeight = FontWeight.Bold,
                     color = Color.Black,
                     textAlign = TextAlign.Center,
-                    fontFamily = Poppins
+                    // fontFamily = Poppins  // Uncomment if defined
                 )
             )
 
@@ -52,7 +61,7 @@ fun ClassPage(subjectName: String, subjectCode: String, startDate: String) {
                     fontSize = 16.sp,
                     fontWeight = FontWeight.Normal,
                     color = Color.Black,
-                    fontFamily = Poppins
+                    // fontFamily = Poppins  // Uncomment if defined
                 )
             )
 
@@ -64,7 +73,7 @@ fun ClassPage(subjectName: String, subjectCode: String, startDate: String) {
                 textAlign = TextAlign.Center,
                 style = TextStyle(
                     fontSize = 16.sp,
-                    fontFamily = Poppins,
+                    // fontFamily = Poppins,  // Uncomment if defined
                     fontWeight = FontWeight.Normal,
                     color = Color.Black
                 ),
@@ -83,27 +92,26 @@ fun ClassPage(subjectName: String, subjectCode: String, startDate: String) {
                 )
             }
 
-            // Scan Button
+            // Scan Button (Assuming you have defined QRScannerButton())
             QRScannerButton()
-
 
             Spacer(modifier = Modifier.height(32.dp))
 
-            // "Having issues?" Section
+            // "Having issues?" Section with Edit button
             Column(
-                modifier = Modifier.align(alignment = Alignment.CenterHorizontally)
+                modifier = Modifier.align(Alignment.CenterHorizontally)
             ) {
                 Box(
                     modifier = Modifier
                         .size(56.dp)
-                        .shadow(
-                            elevation = 4.dp,
-                            shape = CircleShape,
-                            clip = false
-                        )
+                        .shadow(elevation = 4.dp, shape = CircleShape, clip = false)
                         .clip(CircleShape)
                         .background(Color.White)
                         .padding(12.dp)
+                        .clickable {
+                            // Navigate to StudentAttendancePage when tapped
+                            navController.navigate("studentAttendancePage")
+                        }
                         .align(Alignment.CenterHorizontally),
                     contentAlignment = Alignment.Center
                 ) {

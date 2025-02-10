@@ -42,7 +42,9 @@ class MainActivity : ComponentActivity() {
                     Header(navController = navController, isLoggedIn = isLoggedIn)
                     Spacer(modifier = Modifier.height(50.dp))
                     // Pass the same navController to the navigation host.
-                    ScheduleApp(navController = navController)
+                  ScheduleApp(navController = navController)
+
+                  //  StudentAttendancePage()
                 }
             }
         }

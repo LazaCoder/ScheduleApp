@@ -9,7 +9,7 @@ import androidx.navigation.NavHostController
 
 @Composable
 fun ScheduleApp(navController: NavHostController) {
-    // Set "home" as the start destination for login.
+    // Set "home" as the start destination.
     NavHost(navController = navController, startDestination = "home") {
         composable("home") {
             HomePage(navController = navController)
@@ -23,7 +23,7 @@ fun ScheduleApp(navController: NavHostController) {
             val username = backStackEntry.arguments?.getString("username") ?: ""
             SubjectListPage(username = username, navController = navController)
         }
-        // New route for the Random QR Code Screen (for students)
+        // Route for the Random QR Code Screen (for students)
         composable("randomQRCodeScreen") {
             RandomQRCodeScreen()
         }
@@ -38,7 +38,17 @@ fun ScheduleApp(navController: NavHostController) {
             val subjectName = backStackEntry.arguments?.getString("subjectName") ?: ""
             val subjectCode = backStackEntry.arguments?.getString("subjectCode") ?: ""
             val startDate = backStackEntry.arguments?.getString("startDate") ?: ""
-            ClassPage(subjectName = subjectName, subjectCode = subjectCode, startDate = startDate)
+            // Pass navController so ClassPage can navigate
+            ClassPage(
+                subjectName = subjectName,
+                subjectCode = subjectCode,
+                startDate = startDate,
+                navController = navController
+            )
+        }
+        // New route for the Student Attendance Page
+        composable("studentAttendancePage") {
+            StudentAttendancePage()
         }
     }
 }
