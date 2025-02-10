@@ -2,11 +2,11 @@ package com.example.scheduleapp
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.verticalScroll
-import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -26,7 +26,11 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 
 @Composable
-fun SubjectListPage(viewModel: CourseViewModel = viewModel(), navController: NavController) {
+fun SubjectListPage(
+    username: String,  // Received username from login
+    viewModel: CourseViewModel = viewModel(),
+    navController: NavController
+) {
     // Collect the courses list from the ViewModel.
     val courses by viewModel.courses.collectAsState()
 
@@ -38,14 +42,14 @@ fun SubjectListPage(viewModel: CourseViewModel = viewModel(), navController: Nav
                 .verticalScroll(rememberScrollState()),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            // Greeting Section
+            // Greeting Section with the username.
             Text(
-                text = "Hello Sven.",
+                text = "Hello $username.",
                 style = TextStyle(
                     fontSize = 18.sp,
                     fontWeight = FontWeight.Normal,
                     color = Color.Black,
-                    fontFamily = Poppins
+                    fontFamily = Poppins  // Ensure your font is defined/imported
                 )
             )
 
@@ -84,7 +88,7 @@ fun SubjectListPage(viewModel: CourseViewModel = viewModel(), navController: Nav
                             subject = course.name,
                             count = "(${course.code})",
                             onClick = {
-                                // Construct a route with arguments. Be sure to URL-encode if needed.
+                                // Construct a route with arguments.
                                 navController.navigate("classDetail/${course.name}/${course.code}/$dateText")
                             }
                         )
@@ -114,14 +118,14 @@ fun ClassCard(
     date: String,
     subject: String,
     count: String,
-    onClick: () -> Unit  // New parameter for click handling
+    onClick: () -> Unit
 ) {
     Box(
         modifier = Modifier
             .width(304.dp)
             .height(107.dp)
             .background(color = Color(0xFF274C77), shape = RectangleShape)
-            .clickable { onClick() }  // Wrap the card with clickable
+            .clickable { onClick() }
             .padding(16.dp)
     ) {
         Column {

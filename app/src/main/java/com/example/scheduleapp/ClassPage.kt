@@ -84,24 +84,8 @@ fun ClassPage(subjectName: String, subjectCode: String, startDate: String) {
             }
 
             // Scan Button
-            Button(
-                onClick = { /* Action for scanning QR Code */ },
-                modifier = Modifier
-                    .width(170.dp)
-                    .height(65.dp)
-                    .shadow(elevation = 12.dp),
-                shape = RectangleShape
-            ) {
-                Text(
-                    text = "Scan QR Code",
-                    style = TextStyle(
-                        fontSize = 16.sp,
-                        fontWeight = FontWeight.Bold,
-                        color = Color.White,
-                        fontFamily = Poppins
-                    )
-                )
-            }
+            QRScannerButton()
+
 
             Spacer(modifier = Modifier.height(32.dp))
 

@@ -7,6 +7,8 @@ import retrofit2.http.GET
 import java.util.concurrent.TimeUnit
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
+import retrofit2.http.Body
+import retrofit2.http.POST
 
 
 // Data class representing a course.
@@ -30,11 +32,33 @@ data class CoursesResponse(
     val courses: List<Course>
 )
 
+data class LoginRequest(val username: String, val password: String)
+
+data class LoginResponse(
+    val token: String,
+    val username: String,
+    val role: Int,
+    // Add other fields as returned by your API if needed.
+)
+
+
+
 // Retrofit API service interface.
 interface ApiService {
+
+    @POST("api/auth/login")
+    suspend fun login(@Body loginRequest: LoginRequest): LoginResponse
     @GET("api/course")
     suspend fun getCourses(): CoursesResponse
 }
+
+interface AuthApi {
+    @POST("api/auth/login")
+    suspend fun login(@Body loginRequest: LoginRequest): LoginResponse
+}
+
+
+
 
 // A singleton object to build the Retrofit client.
 object ApiClient {

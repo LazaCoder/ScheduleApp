@@ -4,17 +4,28 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import androidx.navigation.NavHostController
 
 @Composable
-fun ScheduleApp() {
-    val navController = rememberNavController()
-
-    NavHost(navController = navController, startDestination = "subjectList") {
-        composable("subjectList") {
-            // Pass the navController to the list so it can trigger navigation.
-            SubjectListPage(navController = navController)
+fun ScheduleApp(navController: NavHostController) {
+    // Set "home" as the start destination for login.
+    NavHost(navController = navController, startDestination = "home") {
+        composable("home") {
+            HomePage(navController = navController)
+        }
+        composable(
+            route = "subjectListPage/{username}",
+            arguments = listOf(
+                navArgument("username") { type = NavType.StringType }
+            )
+        ) { backStackEntry ->
+            val username = backStackEntry.arguments?.getString("username") ?: ""
+            SubjectListPage(username = username, navController = navController)
+        }
+        // New route for the Random QR Code Screen (for students)
+        composable("randomQRCodeScreen") {
+            RandomQRCodeScreen()
         }
         composable(
             route = "classDetail/{subjectName}/{subjectCode}/{startDate}",
@@ -24,11 +35,9 @@ fun ScheduleApp() {
                 navArgument("startDate") { type = NavType.StringType }
             )
         ) { backStackEntry ->
-            // Retrieve the arguments
             val subjectName = backStackEntry.arguments?.getString("subjectName") ?: ""
             val subjectCode = backStackEntry.arguments?.getString("subjectCode") ?: ""
             val startDate = backStackEntry.arguments?.getString("startDate") ?: ""
-            // Pass the subject data to your detailed ClassPage
             ClassPage(subjectName = subjectName, subjectCode = subjectCode, startDate = startDate)
         }
     }
